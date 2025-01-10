@@ -40,7 +40,7 @@ public class SwerveModule {
 
         driveMotor = new SparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new SparkMax(turningMotorId, MotorType.kBrushless);
-        driveMotor.setIdleMode(IdleMode.kCoast);
+        driveMotor.setIdleuMode(IdleMode.kCoast);
         driveMotor.setInverted(driveMotorReversed);
         turningMotor.setInverted(turningMotorReversed);
         turningMotor.setIdleMode(IdleMode.kBrake);

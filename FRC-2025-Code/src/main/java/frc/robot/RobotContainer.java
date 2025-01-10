@@ -25,26 +25,15 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.commands.resetheading;
-import frc.robot.subsystems.Launcher;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Feed;
-import frc.robot.commands.Shooter;
-import frc.robot.commands.AMPLaunch;
-import frc.robot.commands.Wind;
-import frc.robot.commands.Des;
-import frc.robot.commands.Intake;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.VideoSink;
 import edu.wpi.first.cscore.VideoSource;
 import edu.wpi.first.cscore.VideoSource;
-import frc.robot.commands.Climb;
 public class RobotContainer {
 
         private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
-        private final Launcher launcher = new Launcher();
-        private final Feed feed = new Feed();
-        private final Climber climber = new Climber();
+       
         private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
 
         private final XboxController operatorJoytick = new XboxController(OIConstants.kOperatorControllerPort);
@@ -83,12 +72,7 @@ public class RobotContainer {
 
         private void configureButtonBindings() {
                 new JoystickButton(driverJoytick, 2).whileTrue(new resetheading(swerveSubsystem));
-                new JoystickButton(operatorJoytick, 6).whileTrue(new Shooter(launcher));
-                  new JoystickButton(operatorJoytick, 3).whileTrue(new AMPLaunch(launcher));
-                new JoystickButton(operatorJoytick, 5).whileTrue(new Intake(launcher,feed));
-                new JoystickButton(operatorJoytick, 4).whileTrue(new Wind(feed));
-                new JoystickButton(operatorJoytick, 1).whileTrue(new Climb(climber));
-                 new JoystickButton(operatorJoytick, 2).whileTrue(new Des(climber));
+               
         }
 
         public Command getAutonomousCommand() {
