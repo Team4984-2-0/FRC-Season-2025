@@ -1,7 +1,9 @@
 package frc.robot.subsystems;
 
-import com.studica.frc.AHRS;
-import edu.wpi.first.wpilibj.SPI;
+
+
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -51,7 +53,7 @@ public class SwerveSubsystem extends SubsystemBase {
             DriveConstants.kBackRightDriveAbsoluteEncoderOffsetRad,
             DriveConstants.kBackRightDriveAbsoluteEncoderReversed);
 
-    private final AHRS gyro = new AHRS(SPI.Port.kMXP);
+      private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
     private Field2d myfield;
     private SwerveModulePosition frontleftpos = new SwerveModulePosition (frontLeft.getDrivePosition(),frontLeft.getState().angle);
     private SwerveModulePosition frontrightpos = new SwerveModulePosition (frontRight.getDrivePosition(),frontRight.getState().angle);
@@ -89,6 +91,7 @@ public class SwerveSubsystem extends SubsystemBase {
     public double getHeading() {
         return Math.IEEEremainder(-gyro.getAngle(), 360);
     }
+        
 
     public Rotation2d getRotation2d() {
         return Rotation2d.fromDegrees(getHeading());
