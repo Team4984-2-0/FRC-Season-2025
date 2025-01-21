@@ -1,6 +1,9 @@
 package frc.robot.subsystems;
 
+import com.studica.frc.AHRS;
+import com.studica.frc.AHRS.NavXComType;
 
+import edu.wpi.first.wpilibj.SPI;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
@@ -53,7 +56,10 @@ public class SwerveSubsystem extends SubsystemBase {
             DriveConstants.kBackRightDriveAbsoluteEncoderOffsetRad,
             DriveConstants.kBackRightDriveAbsoluteEncoderReversed);
 
-      private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+
+    //private final AHRS gyro = new AHRS(NavXComType.kMXP_SPI); //AHRS(SPI.Port.kMXP);
+
+    private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
     private Field2d myfield;
     private SwerveModulePosition frontleftpos = new SwerveModulePosition (frontLeft.getDrivePosition(),frontLeft.getState().angle);
     private SwerveModulePosition frontrightpos = new SwerveModulePosition (frontRight.getDrivePosition(),frontRight.getState().angle);
