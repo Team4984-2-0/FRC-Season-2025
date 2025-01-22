@@ -57,15 +57,20 @@ public class SwerveModule {
         SparkMaxConfig config_ = new SparkMaxConfig();
         config_.idleMode(SparkBaseConfig.IdleMode.kCoast);
         ////driveEncoder
-        config_.absoluteEncoder.positionConversionFactor(ModuleConstants.kDriveEncoderRot2Meter);
-        config_.absoluteEncoder.velocityConversionFactor(ModuleConstants.kDriveEncoderRPM2MeterPerSec);
-        config_.absoluteEncoder.inverted(absoluteEncoderReversed);
+        //config_.absoluteEncoder.positionConversionFactor(ModuleConstants.kDriveEncoderRot2Meter);
+        //config_.absoluteEncoder.velocityConversionFactor(ModuleConstants.kDriveEncoderRPM2MeterPerSec);
+
+        config_.encoder.positionConversionFactor(ModuleConstants.kDriveEncoderRot2Meter);
+        config_.encoder.velocityConversionFactor(ModuleConstants.kDriveEncoderRPM2MeterPerSec);
+        config_.inverted(absoluteEncoderReversed);
         driveMotor.configure(config_, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
     
         config_.idleMode(SparkBaseConfig.IdleMode.kBrake);
         ////turningEncoder
-        config_.absoluteEncoder.positionConversionFactor(ModuleConstants.kTurningEncoderRot2Rad);
-        config_.absoluteEncoder.velocityConversionFactor(ModuleConstants.kTurningEncoderRPM2RadPerSec);
+        config_.encoder.positionConversionFactor(ModuleConstants.kTurningEncoderRot2Rad);
+        config_.encoder.velocityConversionFactor(ModuleConstants.kTurningEncoderRPM2RadPerSec);
+        //config_.absoluteEncoder.positionConversionFactor(ModuleConstants.kTurningEncoderRot2Rad);
+        //config_.absoluteEncoder.velocityConversionFactor(ModuleConstants.kTurningEncoderRPM2RadPerSec);
         //config_.absoluteEncoder.inverted(absoluteEncoderReversed);
         turningMotor.configure(config_, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
 
