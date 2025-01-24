@@ -30,13 +30,16 @@ import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.VideoSink;
 import edu.wpi.first.cscore.VideoSource;
 import edu.wpi.first.cscore.VideoSource;
-//import frc.robot.subsystems.Elevator;
-//import frc.robot.commands.ElevatorGo;
+import frc.robot.subsystems.Elevator;
+import frc.robot.commands.ElevatorGo;
+import frc.robot.subsystems.Launcher;
+import frc.robot.commands.Launch;
 public class RobotContainer {
 
         private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
        
-        //private final Elevator elevator = new Elevator();
+        private final Elevator elevator = new Elevator();
+        private final Launcher launcher = new Launcher();
 
         private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
 
@@ -76,7 +79,8 @@ public class RobotContainer {
 
         private void configureButtonBindings() {
                 new JoystickButton(driverJoytick, 2).whileTrue(new resetheading(swerveSubsystem));
-                //new JoystickButton(operatorJoytick, 6).whileTrue(new ElevatorGo(elevator));
+                new JoystickButton(operatorJoytick, 6).whileTrue(new ElevatorGo(elevator));
+               // new JoystickButton(operatorJoytick, 7).whileTrue(new Launch(launcher));
                
         }
 
