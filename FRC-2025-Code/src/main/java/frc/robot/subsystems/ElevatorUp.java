@@ -8,13 +8,13 @@ import com.revrobotics.spark.*;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
-public class Elevator extends SubsystemBase {
+public class ElevatorUp extends SubsystemBase {
 
     private SparkMax motor1;
     private SparkMax motor2;
     
 
-    public Elevator() {
+    public ElevatorUp() {
         motor1 = new SparkMax(9, MotorType.kBrushless);
         motor2 = new SparkMax(10, MotorType.kBrushless);
        
