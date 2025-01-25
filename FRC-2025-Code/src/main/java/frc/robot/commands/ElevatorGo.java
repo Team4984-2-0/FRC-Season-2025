@@ -11,7 +11,7 @@ public class ElevatorGo extends Command {
         }
         @Override
         public void execute(){
-            elevatorSub.Rotate(30);
+            elevatorSub.Rotate(5);
         }
         @Override
         public void end(boolean interrupted){
