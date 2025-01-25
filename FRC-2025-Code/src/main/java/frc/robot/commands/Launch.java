@@ -4,7 +4,7 @@ import frc.robot.subsystems.Launcher;
 
 public class Launch extends Command {
         private Launcher launchSub;
-
+        
         public Launch(Launcher elevatorSub){
             this.launchSub = launchSub;
             addRequirements(launchSub);

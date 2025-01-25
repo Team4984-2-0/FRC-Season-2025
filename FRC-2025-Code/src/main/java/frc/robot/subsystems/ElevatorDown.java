@@ -8,26 +8,26 @@ import com.revrobotics.spark.*;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
-public class Launcher extends SubsystemBase {
+public class ElevatorDown extends SubsystemBase {
 
-    private SparkMax motor3;
-  //  private SparkMax motor4;
+    private SparkMax motor1;
+    private SparkMax motor2;
     
 
-    public Launcher() {
-        motor3 = new SparkMax(11, MotorType.kBrushless);
-      //  motor4 = new SparkMax(12, MotorType.kBrushless);
+    public ElevatorDown() {
+        motor1 = new SparkMax(9, MotorType.kBrushless);
+        motor2 = new SparkMax(10, MotorType.kBrushless);
        
     }
 
 public void Rotate(double value) {
-    motor3.set(value);
-   // motor4.set(-value);
+    motor1.set(-value);
+    motor2.set(value);
 }
 
 public void Rotate() {
-    motor3.set(0);
-//    motor4.set(0);
+    motor1.set(0);
+    motor2.set(0);
 }
 
 
