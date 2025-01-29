@@ -78,7 +78,7 @@ public class SwerveModule {
         turningPidController.enableContinuousInput(-Math.PI, Math.PI);
         //SmartDashboard.putNumber("encoder" + absoluteEncoder.getChannel(), getAbsoluteEncoderRad());
         resetEncoders();
-        
+        SmartDashboard.putNumber("encoder" + absoluteEncoder.getChannel() + " start", getAbsoluteEncoderRad());
         
     }
 

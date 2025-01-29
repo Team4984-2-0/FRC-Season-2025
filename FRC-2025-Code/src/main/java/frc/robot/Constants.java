@@ -44,7 +44,7 @@ public class Constants {
 
     public static final class DriveConstants {
 
-        public static final double kTrackWidth = Units.inchesToMeters(19);
+        public static final double kTrackWidth = Units.inchesToMeters(21);
         // Distance between right and left wheels
         public static final double kWheelBase = Units.inchesToMeters(21);
         // Distance between front and back wheels
@@ -85,10 +85,10 @@ public class Constants {
         public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
 
 
-        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -4.0;//-0.2
-        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -4.0;//-4.0
-        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 6.245;//0
-        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = 0.235;
+        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = 5.558021797288;//5.511;//-0.2    -4
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 5.466365070063861;//5.474;//-4.0
+        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 3.10695145190838;//-3.114; //0 6.245
+        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = 3.413991601183854;//3.212; //0.235
 
 /*         public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -0.254;
         public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -1.252;

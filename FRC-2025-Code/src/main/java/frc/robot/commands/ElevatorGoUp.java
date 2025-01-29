@@ -1,16 +1,16 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.ElevatorUp;
+import frc.robot.subsystems.Elevator;
 
 public class ElevatorGoUp extends Command {
-        private ElevatorUp elevatorSub;
-        public ElevatorGoUp(ElevatorUp elevatorSub){
+        private Elevator elevatorSub;
+        public ElevatorGoUp(Elevator elevatorSub){
             this.elevatorSub = elevatorSub;
             addRequirements(elevatorSub);
         }
         @Override
         public void execute(){
-              elevatorSub.Rotate(5);
+              elevatorSub.Rotate(-2);
         }
         @Override
         public void end(boolean interrupted){
