@@ -40,39 +40,26 @@ public class SwerveModule {
 
         driveMotor = new SparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new SparkMax(turningMotorId, MotorType.kBrushless);
-     //   driveMotor.setIdleuMode(IdleMode.kCoast);
-     //   driveMotor.setInverted(driveMotorReversed);
-     //   turningMotor.setInverted(turningMotorReversed);
-     //   turningMotor.setIdleMode(IdleMode.kBrake);
 
         driveEncoder = driveMotor.getEncoder();
         turningEncoder = turningMotor.getEncoder();
 
-//        driveEncoder.setPositionConversionFactor(ModuleConstants.kDriveEncoderRot2Meter);
-//        driveEncoder.setVelocityConversionFactor(ModuleConstants.kDriveEncoderRPM2MeterPerSec);
-//        turningEncoder.setPositionConversionFactor(ModuleConstants.kTurningEncoderRot2Rad);
-//        turningEncoder.setVelocityConversionFactor(ModuleConstants.kTurningEncoderRPM2RadPerSec);
+        SparkMaxConfig driveConfig = new SparkMaxConfig();
+        SparkMaxConfig turnConfig = new SparkMaxConfig();
 
-        ///Keith
-        SparkMaxConfig config_ = new SparkMaxConfig();
-        config_.idleMode(SparkBaseConfig.IdleMode.kCoast);
-        ////driveEncoder
-        //config_.absoluteEncoder.positionConversionFactor(ModuleConstants.kDriveEncoderRot2Meter);
-        //config_.absoluteEncoder.velocityConversionFactor(ModuleConstants.kDriveEncoderRPM2MeterPerSec);
+        driveConfig.idleMode(SparkBaseConfig.IdleMode.kCoast);
+        driveConfig.encoder.positionConversionFactor(ModuleConstants.kDriveEncoderRot2Meter);
+        driveConfig.encoder.velocityConversionFactor(ModuleConstants.kDriveEncoderRPM2MeterPerSec);
+        driveConfig.inverted(driveMotorReversed);
 
-        config_.encoder.positionConversionFactor(ModuleConstants.kDriveEncoderRot2Meter);
-        config_.encoder.velocityConversionFactor(ModuleConstants.kDriveEncoderRPM2MeterPerSec);
-        config_.inverted(absoluteEncoderReversed);
-        driveMotor.configure(config_, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
-    
-        config_.idleMode(SparkBaseConfig.IdleMode.kBrake);
-        ////turningEncoder
-        config_.encoder.positionConversionFactor(ModuleConstants.kTurningEncoderRot2Rad);
-        config_.encoder.velocityConversionFactor(ModuleConstants.kTurningEncoderRPM2RadPerSec);
-        //config_.absoluteEncoder.positionConversionFactor(ModuleConstants.kTurningEncoderRot2Rad);
-        //config_.absoluteEncoder.velocityConversionFactor(ModuleConstants.kTurningEncoderRPM2RadPerSec);
-        //config_.absoluteEncoder.inverted(absoluteEncoderReversed);
-        turningMotor.configure(config_, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
+        driveMotor.configure(driveConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
+
+        turnConfig.idleMode(SparkBaseConfig.IdleMode.kBrake);
+        turnConfig.encoder.positionConversionFactor(ModuleConstants.kTurningEncoderRot2Rad);
+        turnConfig.encoder.velocityConversionFactor(ModuleConstants.kTurningEncoderRPM2RadPerSec);
+        turnConfig.inverted(turningMotorReversed);
+
+        turningMotor.configure(turnConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
 
         turningPidController = new PIDController(ModuleConstants.kPTurning, 0, 0);
         turningPidController.enableContinuousInput(-Math.PI, Math.PI);
@@ -129,15 +116,8 @@ public class SwerveModule {
     }
 
     public void setDesiredState(SwerveModuleState state) {
-
-/*          if (Math.abs(state.speedMetersPerSecond) < 0.001) {
-            stop();
-            return;
-        }  */
+        // This needs to be changed since it is depricated
         state = SwerveModuleState.optimize(state, getState().angle);
-        if (absoluteEncoder.getChannel() == 0) {
-        //System.out.println(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
-        }
         driveMotor.set(state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
         turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
         SmartDashboard.putString("Swerve[" + absoluteEncoder.getChannel() + "] state", state.toString());

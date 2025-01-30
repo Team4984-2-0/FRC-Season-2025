@@ -115,7 +115,6 @@ public class SwerveSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        //TBD.NeedsARealFixButEliminatesCompileErrors
         WheelPositions[0].angle =  frontLeft.getState().angle;
         WheelPositions[0].distanceMeters =  frontLeft.getDrivePosition();
 
@@ -136,7 +135,6 @@ public class SwerveSubsystem extends SubsystemBase {
         SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
         SmartDashboard.putNumber("odometer X", getPose().getX());
         SmartDashboard.putNumber("odometer Y", getPose().getY());
-
     }
 
     public void stopModules() {
