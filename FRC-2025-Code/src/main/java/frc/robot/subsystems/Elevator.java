@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.spark.*;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.config.SparkBaseConfig;
+import com.revrobotics.spark.config.SparkMaxConfig;
 
 public class Elevator extends SubsystemBase {
 
@@ -14,15 +16,18 @@ public class Elevator extends SubsystemBase {
     
 
     public Elevator() {
-        
+        SparkMaxConfig elevatorConfig = new SparkMaxConfig();
+        elevatorConfig.idleMode(SparkBaseConfig.IdleMode.kBrake);
         motor1 = new SparkMax(9, MotorType.kBrushless);
         motor2 = new SparkMax(10, MotorType.kBrushless);
+        motor1.configure(elevatorConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
+        motor2.configure(elevatorConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
        
     }
 
 public void Rotate(double value) {
     motor1.set(value);
-    motor2.set(value);
+    motor2.set(-value);
 }
 
 public void Rotate() {
