@@ -2,19 +2,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Launcher;
 
-public class Launch extends Command {
-        private Launcher Launchsub;
+public class Intake extends Command {
+        private Launcher intakesub;
         
-        public Launch(Launcher Launchsub){
-            this.Launchsub = Launchsub;
-            addRequirements(Launchsub);
+        public Intake(Launcher intakesub){
+            this.intakesub = intakesub;
+            addRequirements(intakesub);
         }
         @Override
         public void execute(){
-            Launchsub.Spin(50);
+            intakesub.Spin(-0.5);
         }
         @Override
         public void end(boolean interrupted){
-            Launchsub.Spin(0);
+            intakesub.Spin(0);
         }
 }

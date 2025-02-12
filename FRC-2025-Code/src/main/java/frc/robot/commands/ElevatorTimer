@@ -1,16 +1,27 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.Timer;
 import frc.robot.subsystems.Elevator;
 
 public class ElevatorGoUp extends Command {
         private Elevator elevatorSub;
+        private static final double run_time = 1.0;
         public ElevatorGoUp(Elevator elevatorSub){
             this.elevatorSub = elevatorSub;
+            Timer = new Timer();
+            addRequirements(elevator);
             addRequirements(elevatorSub);
         }
+       
         @Override
         public void execute(){
-              elevatorSub.Rotate(-0.1);
+            timer.reset();
+            timer.start();
+            elevatorSub.Rotate(0.1);
+             if (timer.get() >= run_time){
+                elevatorSub.Rotate(0);
+                end();
+             }
         }
         @Override
         public void end(boolean interrupted){

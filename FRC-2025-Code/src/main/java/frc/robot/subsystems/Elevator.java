@@ -11,11 +11,26 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 
 public class Elevator extends SubsystemBase {
 
+public float ElevatorHeight = 0;
+public float diffrenceHeight = 0;
+public float WantHeight = 0;
+
     private SparkMax motor1;
     private SparkMax motor2;
     
 
     public Elevator() {
+        if (ElevatorHeight > WantHeight) {
+           
+            diffrenceHeight = ElevatorHeight - WantHeight;
+        }
+        if (ElevatorHeight < WantHeight) {
+            
+        }
+        if (ElevatorHeight == WantHeight) {
+            
+        }
+
         SparkMaxConfig elevatorConfig = new SparkMaxConfig();
         elevatorConfig.idleMode(SparkBaseConfig.IdleMode.kBrake);
         motor1 = new SparkMax(9, MotorType.kBrushless);

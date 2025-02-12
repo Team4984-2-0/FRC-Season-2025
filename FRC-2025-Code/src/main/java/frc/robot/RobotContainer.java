@@ -37,6 +37,7 @@ import frc.robot.commands.ElevatorGodown;
 import frc.robot.subsystems.Launcher;
 
 import frc.robot.commands.Launch;
+import frc.robot.commands.Intake;
 
 public class RobotContainer {
 
@@ -83,10 +84,12 @@ public class RobotContainer {
                 }
         }
 
-        private void configureButtonBindings() {
+        private void configureButtonBindings () {
                 new JoystickButton(driverJoytick, 2).whileTrue(new resetheading(swerveSubsystem));
-                new JoystickButton(operatorJoytick, 5).whileTrue(new ElevatorGoUp(elevator));
-                new JoystickButton(operatorJoytick, 6).whileTrue(new ElevatorGodown(elevator));
+                new JoystickButton(operatorJoytick, 5).whileTrue(new Intake(launcher));
+                new JoystickButton(operatorJoytick, 6).whileTrue(new Launch(launcher));
+                new JoystickButton(operatorJoytick, 2).whileTrue(new ElevatorGoUp(elevator));
+                new JoystickButton(operatorJoytick, 1).whileTrue(new ElevatorGodown(elevator));
               // XboxController.Button.
                // new JoystickButton(operatorJoytick, 7).whileTrue(new Launch(launcher));
                
@@ -185,5 +188,3 @@ public class RobotContainer {
           }
         }
       }
-
-
