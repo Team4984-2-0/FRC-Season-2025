@@ -28,7 +28,7 @@ public class Launcher extends SubsystemBase {
 
 public void Spin(double value) {
     motor3.set(value);
-    motor4.set(-value + 20);
+    motor4.set(-value);
 }
 
 

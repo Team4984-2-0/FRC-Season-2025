@@ -11,7 +11,7 @@ public class Intake extends Command {
         }
         @Override
         public void execute(){
-            intakesub.Spin(-0.5);
+            intakesub.Spin(0.30);
         }
         @Override
         public void end(boolean interrupted){

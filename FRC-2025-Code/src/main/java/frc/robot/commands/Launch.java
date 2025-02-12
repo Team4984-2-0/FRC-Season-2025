@@ -11,7 +11,7 @@ public class Launch extends Command {
         }
         @Override
         public void execute(){
-            Launchsub.Spin(50);
+            Launchsub.Spin(-0.30);
         }
         @Override
         public void end(boolean interrupted){
