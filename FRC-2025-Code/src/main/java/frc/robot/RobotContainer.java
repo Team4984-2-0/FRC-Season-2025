@@ -34,7 +34,9 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorGoUp;
 import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorGodown;
+
 import frc.robot.subsystems.Launcher;
+import frc.robot.subsystems.AutoFeeder;
 
 import frc.robot.commands.Launch;
 import frc.robot.commands.Intake;
@@ -44,6 +46,7 @@ public class RobotContainer {
         private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
        
         private final Elevator elevator = new Elevator();
+        private final AutoFeeder elevatorAuto = new AutoFeeder();
        
         private final Launcher launcher = new Launcher();
         
@@ -89,6 +92,7 @@ public class RobotContainer {
                 new JoystickButton(operatorJoytick, 5).whileTrue(new Intake(launcher));
                 new JoystickButton(operatorJoytick, 6).whileTrue(new Launch(launcher));
                 new JoystickButton(operatorJoytick, 2).whileTrue(new ElevatorGoUp(elevator));
+               // new JoystickButton(operatorJoytick, 3).whileTrue(new AutoFeeder(ElevCmdFeed));
                 new JoystickButton(operatorJoytick, 1).whileTrue(new ElevatorGodown(elevator));
               // XboxController.Button.
                // new JoystickButton(operatorJoytick, 7).whileTrue(new Launch(launcher));

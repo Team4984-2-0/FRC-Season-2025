@@ -41,9 +41,11 @@ public float WantHeight = 0;
     }
 
 public void Rotate(double value) {
+
     motor1.set(value);
     motor2.set(-value);
 }
+
 
 public void Rotate() {
     motor1.set(0);
