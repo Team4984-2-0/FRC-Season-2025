@@ -30,14 +30,12 @@ import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.VideoSink;
 import edu.wpi.first.cscore.VideoSource;
 import edu.wpi.first.cscore.VideoSource;
-import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorGoUp;
-import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorGodown;
 
 import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.AutoFeeder;
-
+import frc.robot.commands.ElevatorAuto;
 import frc.robot.commands.Launch;
 import frc.robot.commands.Intake;
 
@@ -45,7 +43,7 @@ public class RobotContainer {
 
         private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
        
-        private final Elevator elevator = new Elevator();
+      
         private final AutoFeeder elevatorAuto = new AutoFeeder();
        
         private final Launcher launcher = new Launcher();
@@ -91,9 +89,9 @@ public class RobotContainer {
                 new JoystickButton(driverJoytick, 2).whileTrue(new resetheading(swerveSubsystem));
                 new JoystickButton(operatorJoytick, 5).whileTrue(new Intake(launcher));
                 new JoystickButton(operatorJoytick, 6).whileTrue(new Launch(launcher));
-                new JoystickButton(operatorJoytick, 2).whileTrue(new ElevatorGoUp(elevator));
-               // new JoystickButton(operatorJoytick, 3).whileTrue(new AutoFeeder(ElevCmdFeed));
-                new JoystickButton(operatorJoytick, 1).whileTrue(new ElevatorGodown(elevator));
+                new JoystickButton(operatorJoytick, 2).whileTrue(new ElevatorGoUp(elevatorAuto));
+                new JoystickButton(operatorJoytick, 3).whileTrue(new ElevatorAuto(elevatorAuto));
+                new JoystickButton(operatorJoytick, 1).whileTrue(new ElevatorGodown(elevatorAuto));
               // XboxController.Button.
                // new JoystickButton(operatorJoytick, 7).whileTrue(new Launch(launcher));
                

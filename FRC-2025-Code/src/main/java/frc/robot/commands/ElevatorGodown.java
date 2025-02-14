@@ -1,10 +1,11 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.AutoFeeder;
+
 
 public class ElevatorGodown extends Command {
-        private Elevator elevatorSub;
-        public ElevatorGodown(Elevator elevatorSub){
+        private AutoFeeder elevatorSub;
+        public ElevatorGodown(AutoFeeder elevatorSub){
             this.elevatorSub = elevatorSub;
             addRequirements(elevatorSub);
         }

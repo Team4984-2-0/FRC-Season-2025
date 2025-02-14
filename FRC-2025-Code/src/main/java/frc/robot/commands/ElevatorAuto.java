@@ -4,14 +4,14 @@ import frc.robot.subsystems.AutoFeeder;
 
 public class ElevatorAuto extends Command {
         private AutoFeeder elevatorSub;
-        public ElevatorGoUp(AutoFeeder elevatorSub){
+        public ElevatorAuto(AutoFeeder elevatorSub){
             this.elevatorSub = elevatorSub;
             addRequirements(elevatorSub);
         }
         @Override
         public void execute(){
             while (elevatorSub.get_encoder() < 25) {
-                elevatorSub.Rotate(-0.5);
+                elevatorSub.pickupAuto(-0.5);
             }
         }
         @Override

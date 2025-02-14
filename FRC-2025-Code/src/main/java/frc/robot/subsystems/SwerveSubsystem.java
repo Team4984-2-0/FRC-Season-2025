@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.pathplanner.lib.config.RobotConfig;
 import com.studica.frc.AHRS;
 import com.studica.frc.AHRS.NavXComType;
 
@@ -67,7 +68,9 @@ public class SwerveSubsystem extends SubsystemBase {
     private SwerveModulePosition backRightpos = new SwerveModulePosition (backRight.getDrivePosition(),backRight.getState().angle);
 
     private SwerveModulePosition[] WheelPositions = {frontleftpos,frontrightpos,backLeftpos,backRightpos};
- 
+    
+    
+
     double xLocationStartFeet = 3.0 / UnitConversions.feetToMeters;  //down field long 
     double yLocationStartFeet = 11.0 / UnitConversions.feetToMeters;  // side to side 
     Rotation2d angleStartDegrees = Rotation2d.fromDegrees(0.0);
@@ -76,6 +79,8 @@ public class SwerveSubsystem extends SubsystemBase {
             new Rotation2d(0), WheelPositions, startingPosition);
 
     public SwerveSubsystem() {
+        
+        
         new Thread(() -> {
             try {
                 Thread.sleep(1000);
@@ -90,6 +95,8 @@ public class SwerveSubsystem extends SubsystemBase {
         myfield = new Field2d();
     }
 
+
+    
     public void zeroHeading() {
         gyro.reset();
     }
