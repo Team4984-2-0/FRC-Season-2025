@@ -29,10 +29,10 @@ public class AutoFeeder extends SubsystemBase {
 
 private final RelativeEncoder motor1Encoder;
     private final RelativeEncoder motor2Encoder;
-
+    private double pidvalue;
     private SparkMax motor1;
     private SparkMax motor2;
-    
+    private final PIDController elevatorPidController;
 
     public AutoFeeder() {
 
@@ -46,20 +46,17 @@ private final RelativeEncoder motor1Encoder;
         motor2Encoder = motor2.getEncoder();
         motor1.configure(elevatorConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
         motor2.configure(elevatorConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
-       
+        elevatorPidController = new PIDController(0.4, 0, 0);
     }
     // Commenting out this for now, working on elevator auto move up / down. (2/12/25)
 
 public void Rotate(double value) {
-    SmartDashboard.putNumber("encoder elevator motor1", motor1Encoder.getPosition());
-    SmartDashboard.putNumber("encoder elevator motor2", motor2Encoder.getPosition());
+    SmartDashboard.putNumber("encoder elevator", get_encoder());
     motor1.set(value);
     motor2.set(-value);
 }
 
-public void Rotate() {
-    SmartDashboard.putNumber("encoder elevator motor1", motor1Encoder.getPosition());
-    SmartDashboard.putNumber("encoder elevator motor2", motor2Encoder.getPosition());
+public void RotateStop() {
     motor1.set(0);
     motor2.set(0);
 }
@@ -67,17 +64,4 @@ public double get_encoder(){
     return motor2Encoder.getPosition();
 }
 
-public void pickupAuto(double value){
-    if(motor2Encoder.getPosition() < 27.5) {
-        SmartDashboard.putNumber("encoder elevator motor1", motor1Encoder.getPosition());
-        SmartDashboard.putNumber("encoder elevator motor2", motor2Encoder.getPosition());
-        motor1.set(value);
-        motor2.set(-value);  
-    }
-    else{
-        motor1.set(0);
-        motor2.set(0);
-    }
-
-}
 }
