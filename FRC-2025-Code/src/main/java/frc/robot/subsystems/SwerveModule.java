@@ -24,7 +24,7 @@ public class SwerveModule {
 
     private final PIDController turningPidController;
 
-
+    private boolean speed;
 
     // what does this look like
     private final AnalogInput absoluteEncoder;
@@ -68,7 +68,9 @@ public class SwerveModule {
         SmartDashboard.putNumber("encoder" + absoluteEncoder.getChannel() + " start", getAbsoluteEncoderRad());
         
     }
-
+    public void set_speed(boolean howfast) {
+        speed = howfast;
+    }
     public double getDrivePosition() {
         return driveEncoder.getPosition();
     }
@@ -118,8 +120,12 @@ public class SwerveModule {
     public void setDesiredState(SwerveModuleState state) {
         // This needs to be changed since it is depricated
         state = SwerveModuleState.optimize(state, getState().angle);
-        
-        driveMotor.set((state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond)/2);
+        if (speed) {
+            driveMotor.set((state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond));
+        }
+        else {
+            driveMotor.set((state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond)/2);
+        }
         turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
         SmartDashboard.putString("Swerve[" + absoluteEncoder.getChannel() + "] state", state.toString());
         SmartDashboard.putNumber("encoder" + absoluteEncoder.getChannel() + " live", getAbsoluteEncoderRad());

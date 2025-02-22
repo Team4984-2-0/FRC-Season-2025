@@ -39,7 +39,8 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorAutoPickup;
 import frc.robot.commands.Launch;
 import frc.robot.commands.Intake;
-
+import frc.robot.commands.ChangeSpeedHalf;
+import frc.robot.commands.ChangeSpeedMax;
 public class RobotContainer {
 
         private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
@@ -89,6 +90,8 @@ public class RobotContainer {
 
         private void configureButtonBindings () {
                 new JoystickButton(driverJoytick, 2).whileTrue(new resetheading(swerveSubsystem));
+                new JoystickButton(driverJoytick, 1).whileTrue(new ChangeSpeedHalf(swerveSubsystem));
+                new JoystickButton(driverJoytick, 3).whileTrue(new ChangeSpeedMax(swerveSubsystem));
                 new JoystickButton(operatorJoytick, 5).whileTrue(new Intake(launcher));
                 new JoystickButton(operatorJoytick, 8).whileTrue(new Climb(climber));
                 new JoystickButton(operatorJoytick, 6).whileTrue(new Launch(launcher));
