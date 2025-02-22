@@ -16,9 +16,16 @@ public class ElevatorAuto extends Command {
         }
         @Override
         public void execute(){
-            elevatorSub.Rotate(-0.6);
-            if (elevatorSub.get_encoder() >= 27) {
+            if (elevatorSub.get_encoder() > 24 && elevatorSub.get_encoder() < 21) {
                 Finished = true;
+            }
+            else {
+                if (elevatorSub.get_encoder() >= 28){
+                    elevatorSub.Rotate(0.6);
+                }
+                if (elevatorSub.get_encoder() < 24){
+                    elevatorSub.Rotate(-0.6);
+                }
             }
             
         }
