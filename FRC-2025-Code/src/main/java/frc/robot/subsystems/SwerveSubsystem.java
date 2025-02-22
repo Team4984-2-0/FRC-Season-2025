@@ -110,7 +110,6 @@ public class SwerveSubsystem extends SubsystemBase {
         return Math.IEEEremainder(-gyro.getAngle(), 360);
     }
         
-
     public Rotation2d getRotation2d() {
         return Rotation2d.fromDegrees(getHeading());
     }
@@ -119,10 +118,8 @@ public class SwerveSubsystem extends SubsystemBase {
         return odometer.getPoseMeters();
     }
 
-    public void resetOdometry(Pose2d pose) {
-        //TBD.NeedsARealFixButEliminatesCompileErrors
-        SwerveModulePosition[] TBDWheelPositions = new SwerveModulePosition[4];
-        odometer.resetPosition(getRotation2d(), TBDWheelPositions, pose);
+    public void resetpose(Pose2d pose) {
+        odometer.resetPosition(getRotation2d(), WheelPositions, pose);
     }
 
     @Override

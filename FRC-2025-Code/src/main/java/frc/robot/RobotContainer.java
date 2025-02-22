@@ -3,6 +3,7 @@ package frc.robot;
 import java.util.List;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.VideoSource;
@@ -55,8 +56,10 @@ public class RobotContainer {
         private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
 
         private final XboxController operatorJoytick = new XboxController(OIConstants.kOperatorControllerPort);
+        SendableChooser<Command> m_Chooser = new SendableChooser<>();
 
         public RobotContainer() {
+                m_Chooser.setDefaultOption("Auto Command", getAutonomousCommand());
                 swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
                                 swerveSubsystem,
                                 () -> -driverJoytick.getRawAxis(OIConstants.kDriverYAxis),
@@ -66,7 +69,7 @@ public class RobotContainer {
                 // launcher.setDefaultCommand(new Shooter(launcher));
                 configureButtonBindings();
                 // Ported Camera Code
- 
+                SmartDashboard.putData("Auto Mode",m_Chooser);
                 CameraThread myCameraThread = null;
 
                 try {
@@ -139,7 +142,7 @@ public class RobotContainer {
 
                 // 5. Add some init and wrap-up, and return everything
                 return new SequentialCommandGroup(
-                                new InstantCommand(() -> swerveSubsystem.resetOdometry(trajectory.getInitialPose())),
+                                new InstantCommand(() -> swerveSubsystem.resetpose(trajectory.getInitialPose())),
                                 swerveControllerCommand,
                                 new InstantCommand(() -> swerveSubsystem.stopModules()));
         }
