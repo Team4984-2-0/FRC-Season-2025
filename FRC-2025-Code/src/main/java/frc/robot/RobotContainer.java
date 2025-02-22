@@ -35,8 +35,8 @@ import frc.robot.commands.ElevatorGodown;
 import frc.robot.subsystems.Climber;
 import frc.robot.commands.Climb;
 import frc.robot.subsystems.Launcher;
-import frc.robot.subsystems.AutoFeeder;
-import frc.robot.commands.ElevatorAuto;
+import frc.robot.subsystems.Elevator;
+import frc.robot.commands.ElevatorAutoPickup;
 import frc.robot.commands.Launch;
 import frc.robot.commands.Intake;
 
@@ -46,7 +46,7 @@ public class RobotContainer {
       
         private final Climber climber = new Climber();
   
-        private final AutoFeeder elevatorAuto = new AutoFeeder();
+        private final Elevator elevator = new Elevator();
        
         private final Launcher launcher = new Launcher();
         
@@ -92,9 +92,9 @@ public class RobotContainer {
                 new JoystickButton(operatorJoytick, 5).whileTrue(new Intake(launcher));
                 new JoystickButton(operatorJoytick, 8).whileTrue(new Climb(climber));
                 new JoystickButton(operatorJoytick, 6).whileTrue(new Launch(launcher));
-                new JoystickButton(operatorJoytick, 1).whileTrue(new ElevatorGoUp(elevatorAuto));
-               new JoystickButton(operatorJoytick, 3).whileTrue(new ElevatorAuto(elevatorAuto));
-                new JoystickButton(operatorJoytick,2).whileTrue(new ElevatorGodown(elevatorAuto));
+                new JoystickButton(operatorJoytick, 1).whileTrue(new ElevatorGoUp(elevator));
+                new JoystickButton(operatorJoytick, 3).whileTrue(new ElevatorAutoPickup(elevator));
+                new JoystickButton(operatorJoytick,2).whileTrue(new ElevatorGodown(elevator));
               // XboxController.Button.
                // new JoystickButton(operatorJoytick, 7).whileTrue(new Launch(launcher));
                

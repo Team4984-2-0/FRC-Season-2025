@@ -22,16 +22,12 @@ public class Launcher extends SubsystemBase {
         motor4 = new SparkMax(12, MotorType.kBrushless);
        
         motor3.configure(elevatorConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
-       
-       
     }
 
 public void Spin(double value) {
     motor3.set(value);
     motor4.set(-value);
 }
-
-
 
 public void Spin() {
     motor3.set(0);

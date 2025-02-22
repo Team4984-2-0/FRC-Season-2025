@@ -19,15 +19,13 @@ public class Climber extends SubsystemBase {
         SparkMaxConfig elevatorConfig = new SparkMaxConfig();
         elevatorConfig.idleMode(SparkBaseConfig.IdleMode.kBrake);
         climbMotor = new SparkMax(13, MotorType.kBrushless);
-       
-       
+    
     }
 
 public void Spin(double value) {
     climbMotor.set(value);
   
 }
-
 
 
 public void Spin() {

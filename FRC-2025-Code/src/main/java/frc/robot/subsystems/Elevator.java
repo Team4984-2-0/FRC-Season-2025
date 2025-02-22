@@ -24,7 +24,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
-public class AutoFeeder extends SubsystemBase {
+public class Elevator extends SubsystemBase {
 
 
 private final RelativeEncoder motor1Encoder;
@@ -34,7 +34,7 @@ private final RelativeEncoder motor1Encoder;
     private SparkMax motor2;
     private final PIDController elevatorPidController;
 
-    public AutoFeeder() {
+    public Elevator() {
 
 
         
