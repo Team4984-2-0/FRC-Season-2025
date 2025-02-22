@@ -21,10 +21,10 @@ public class ElevatorAutoPickup extends Command {
             }
             else {
                 if (elevatorSub.get_encoder() >= 28){
-                    elevatorSub.Rotate(0.6);
+                    elevatorSub.Rotate(0.4);
                 }
                 if (elevatorSub.get_encoder() < 24){
-                    elevatorSub.Rotate(-0.6);
+                    elevatorSub.Rotate(-0.4);
                 }
             }
             
