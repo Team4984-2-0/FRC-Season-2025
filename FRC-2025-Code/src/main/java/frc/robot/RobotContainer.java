@@ -38,6 +38,9 @@ import frc.robot.commands.Climb;
 import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorAutoPickup;
+import frc.robot.commands.ElevatorAutoL2;
+import frc.robot.commands.ElevatorAutoL3;
+
 import frc.robot.commands.Launch;
 import frc.robot.commands.Intake;
 import frc.robot.commands.ChangeSpeedHalf;
@@ -98,9 +101,9 @@ public class RobotContainer {
                 new JoystickButton(operatorJoytick, 5).whileTrue(new Intake(launcher));
                 new JoystickButton(operatorJoytick, 8).whileTrue(new Climb(climber));
                 new JoystickButton(operatorJoytick, 6).whileTrue(new Launch(launcher));
-                new JoystickButton(operatorJoytick, 1).whileTrue(new ElevatorGoUp(elevator));
+                new JoystickButton(operatorJoytick, 1).whileTrue(new ElevatorAutoL2(elevator));
                 new JoystickButton(operatorJoytick, 3).whileTrue(new ElevatorAutoPickup(elevator));
-                new JoystickButton(operatorJoytick,2).whileTrue(new ElevatorGodown(elevator));
+                new JoystickButton(operatorJoytick,2).whileTrue(new ElevatorAutoL3(elevator));
               // XboxController.Button.
                // new JoystickButton(operatorJoytick, 7).whileTrue(new Launch(launcher));
                
@@ -117,9 +120,12 @@ public class RobotContainer {
                 Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
                                 new Pose2d(0, 0, new Rotation2d(0)),
                                 List.of(
-                                                new Translation2d(1, 0),
-                                                new Translation2d(1, -1)),
-                                new Pose2d(2, -1, Rotation2d.fromDegrees(180)),
+                                    new Translation2d(1, 0),
+                                    new Translation2d(2, 0),
+                                    new Translation2d(3, 0),
+                                    new Translation2d(3, 1),
+                                    new Translation2d(3, 2)),
+                                    new Pose2d(3, 3, Rotation2d.fromDegrees(180)),
                                 trajectoryConfig);
 
                 // 3. Define PID controllers for tracking trajectory
