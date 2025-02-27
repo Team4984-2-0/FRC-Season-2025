@@ -121,7 +121,7 @@ public class SwerveModule {
         // This needs to be changed since it is depricated
         state = SwerveModuleState.optimize(state, getState().angle);
         if (speed) {
-            driveMotor.set((state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond));
+            driveMotor.set((state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond)/1.3);
         }
         else {
             driveMotor.set((state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond)/2);

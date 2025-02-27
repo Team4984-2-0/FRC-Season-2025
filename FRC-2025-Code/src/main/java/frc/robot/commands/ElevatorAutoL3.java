@@ -16,15 +16,15 @@ public class ElevatorAutoL3 extends Command {
         }
         @Override
         public void execute(){
-            if (elevatorSub.get_encoder() > 53 && elevatorSub.get_encoder() < 55) {
+            if (elevatorSub.get_encoder() > 55 && elevatorSub.get_encoder() < 57) {
                 Finished = true;
             }
             else {
-                if (elevatorSub.get_encoder() > 55){
-                    elevatorSub.Rotate(0.2);
+                if (elevatorSub.get_encoder() > 57){
+                    elevatorSub.Rotate(0.3);
                 }
-                if (elevatorSub.get_encoder() < 53){
-                    elevatorSub.Rotate(-0.2);
+                if (elevatorSub.get_encoder() < 55){
+                    elevatorSub.Rotate(-0.3);
                 }
             }
             
