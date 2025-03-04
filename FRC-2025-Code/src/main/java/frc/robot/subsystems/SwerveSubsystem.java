@@ -95,7 +95,7 @@ public class SwerveSubsystem extends SubsystemBase {
         myfield = new Field2d();
     }
 
-    public void maxspeed(boolean speed) {
+    public void maxspeed(int speed) {
         frontLeft.set_speed(speed);
         frontRight.set_speed(speed);
         backLeft.set_speed(speed);

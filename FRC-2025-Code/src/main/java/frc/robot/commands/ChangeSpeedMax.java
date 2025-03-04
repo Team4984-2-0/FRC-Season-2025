@@ -11,7 +11,7 @@ public class ChangeSpeedMax extends Command {
         }
         @Override
         public void execute(){
-            swerveSubsystem.maxspeed(true);
+            swerveSubsystem.maxspeed(1);
         }
         @Override
         public void end(boolean interrupted){

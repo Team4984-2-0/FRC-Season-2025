@@ -47,6 +47,7 @@ import frc.robot.commands.Launch;
 import frc.robot.commands.Intake;
 import frc.robot.commands.ChangeSpeedHalf;
 import frc.robot.commands.ChangeSpeedMax;
+import frc.robot.commands.ChangeSpeedDanger;
 public class RobotContainer {
 
         private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
@@ -65,6 +66,7 @@ public class RobotContainer {
 
         public RobotContainer() {
                 m_Chooser.setDefaultOption("Auto Command", getAutonomousCommand());
+                SmartDashboard.putData("Auto Mode",m_Chooser);
                 swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
                                 swerveSubsystem,
                                 () -> -driverJoytick.getRawAxis(OIConstants.kDriverYAxis),
@@ -74,7 +76,7 @@ public class RobotContainer {
                 // launcher.setDefaultCommand(new Shooter(launcher));
                 configureButtonBindings();
                 // Ported Camera Code
-                SmartDashboard.putData("Auto Mode",m_Chooser);
+                //SmartDashboard.putData("Auto Mode",m_Chooser);
                 CameraThread myCameraThread = null;
 
                 try {
@@ -100,6 +102,8 @@ public class RobotContainer {
                 new JoystickButton(driverJoytick, 2).whileTrue(new resetheading(swerveSubsystem));
                 new JoystickButton(driverJoytick, 1).whileTrue(new ChangeSpeedHalf(swerveSubsystem));
                 new JoystickButton(driverJoytick, 3).whileTrue(new ChangeSpeedMax(swerveSubsystem));
+                new JoystickButton(driverJoytick, 4).whileTrue(new ChangeSpeedDanger(swerveSubsystem));
+
                 new JoystickButton(operatorJoytick, 5).whileTrue(new Intake(launcher));
                 new JoystickButton(operatorJoytick, 8).whileTrue(new Climb(climber));
                 new JoystickButton(operatorJoytick, 7).whileTrue(new Climbbutback(climber));
@@ -124,10 +128,9 @@ public class RobotContainer {
                 Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
                                 new Pose2d(0, 0, new Rotation2d(0)),
                                 List.of(
-                                  new Translation2d(-1, 0),
-                                    new Translation2d(-2, 0)
-                                   ),
-                                    new Pose2d(-3, 0, Rotation2d.fromDegrees(180)),
+                                  new Translation2d(1, 0),
+                                  new Translation2d(2, 0)),
+                                    new Pose2d(4, 0, Rotation2d.fromDegrees(0)),
                                 trajectoryConfig);
                                 /*new Pose2d(8, 6.72, new Rotation2d(0)),
                                 List.of(

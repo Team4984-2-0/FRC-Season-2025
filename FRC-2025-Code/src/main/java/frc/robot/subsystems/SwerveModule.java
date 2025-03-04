@@ -23,7 +23,7 @@ public class SwerveModule {
     private final RelativeEncoder turningEncoder;
 
     private final PIDController turningPidController;
-
+    private int power;
     private boolean speed;
 
     // what does this look like
@@ -38,6 +38,7 @@ public class SwerveModule {
         this.absoluteEncoderReversed = absoluteEncoderReversed;
         absoluteEncoder = new AnalogInput(absoluteEncoderId);
         speed = true;
+        power = 1;
         driveMotor = new SparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new SparkMax(turningMotorId, MotorType.kBrushless);
 
@@ -68,8 +69,8 @@ public class SwerveModule {
         SmartDashboard.putNumber("encoder" + absoluteEncoder.getChannel() + " start", getAbsoluteEncoderRad());
         
     }
-    public void set_speed(boolean howfast) {
-        speed = howfast;
+    public void set_speed(int howfast) {
+        power = howfast;
     }
     public double getDrivePosition() {
         return driveEncoder.getPosition();
@@ -120,12 +121,26 @@ public class SwerveModule {
     public void setDesiredState(SwerveModuleState state) {
         // This needs to be changed since it is depricated
         state = SwerveModuleState.optimize(state, getState().angle);
-        if (speed) {
+        switch (power) {
+            case 1:
+                driveMotor.set((state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond)/1.3);
+                break;
+            case 2:
+                driveMotor.set((state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond)/2);
+                break;
+            case 3: 
+                driveMotor.set((state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond));
+                break;
+            default:
+                driveMotor.set((state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond)/2);
+                break;
+        }
+/*         if (speed) {
             driveMotor.set((state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond)/1.3);
         }
         else {
             driveMotor.set((state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond)/2);
-        }
+        } */
         turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
         SmartDashboard.putString("Swerve[" + absoluteEncoder.getChannel() + "] state", state.toString());
         SmartDashboard.putNumber("encoder" + absoluteEncoder.getChannel() + " live", getAbsoluteEncoderRad());

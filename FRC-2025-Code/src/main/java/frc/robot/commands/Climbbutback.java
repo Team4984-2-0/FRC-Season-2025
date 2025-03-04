@@ -11,7 +11,7 @@ public class Climbbutback extends Command {
         }
         @Override
         public void execute(){
-            climbsub.Spin(-0.20);
+            climbsub.Spin(-0.45);
         }
         @Override
         public void end(boolean interrupted){

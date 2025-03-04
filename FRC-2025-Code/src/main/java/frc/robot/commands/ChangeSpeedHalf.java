@@ -12,7 +12,7 @@ public class ChangeSpeedHalf extends Command {
         }
         @Override
         public void execute(){
-            swerveSubsystem.maxspeed(false);
+            swerveSubsystem.maxspeed(2);
         }
         @Override
         public void end(boolean interrupted){
