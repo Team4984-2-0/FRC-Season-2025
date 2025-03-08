@@ -1,6 +1,10 @@
 package frc.robot;
 
 import java.util.List;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -58,6 +62,7 @@ public class RobotContainer {
        
         private final Launcher launcher = new Launcher();
         
+        private final SendableChooser<Command> autoChooser;
 
         private final Joystick driverJoytick = new Joystick(OIConstants.kDriverControllerPort);
 
@@ -65,7 +70,12 @@ public class RobotContainer {
         SendableChooser<Command> m_Chooser = new SendableChooser<>();
 
         public RobotContainer() {
-                m_Chooser.setDefaultOption("Auto Command", getAutonomousCommand());
+
+                autoChooser = AutoBuilder.buildAutoChooser();
+
+                SmartDashboard.putData("Auto Chooser", autoChooser);
+
+                //m_Chooser.setDefaultOption("Auto Command", getAutonomousCommand());
                 SmartDashboard.putData("Auto Mode",m_Chooser);
                 swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
                                 swerveSubsystem,
@@ -99,7 +109,7 @@ public class RobotContainer {
         }
 
         private void configureButtonBindings () {
-                new JoystickButton(driverJoytick, 2).whileTrue(new resetheading(swerveSubsystem));
+               /*8  new JoystickButton(driverJoytick, 2).whileTrue(new resetheading(swerveSubsystem));
                 new JoystickButton(driverJoytick, 1).whileTrue(new ChangeSpeedHalf(swerveSubsystem));
                 new JoystickButton(driverJoytick, 3).whileTrue(new ChangeSpeedMax(swerveSubsystem));
                 new JoystickButton(driverJoytick, 4).whileTrue(new ChangeSpeedDanger(swerveSubsystem));
@@ -113,58 +123,16 @@ public class RobotContainer {
                 new JoystickButton(operatorJoytick, 3).whileTrue(new ElevatorAutoPickup(elevator));
                 new JoystickButton(operatorJoytick,2).whileTrue(new ElevatorAutoL3(elevator));
               // XboxController.Button.
-               // new JoystickButton(operatorJoytick, 7).whileTrue(new Launch(launcher));
+               // new JoystickButton(operatorJoytick, 7).whileTrue(new Launch(launcher)); */
                
         }
 
-        public Command getAutonomousCommand() {
-                // 1. Create trajectory settings
-                TrajectoryConfig trajectoryConfig = new TrajectoryConfig(
-                                AutoConstants.kMaxSpeedMetersPerSecond,
-                                AutoConstants.kMaxAccelerationMetersPerSecondSquared)
-                                .setKinematics(DriveConstants.kDriveKinematics);
-
-                // 2. Generate trajectory
-                Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-                                new Pose2d(0, 0, new Rotation2d(0)),
-                                List.of(
-                                  new Translation2d(1, 0),
-                                  new Translation2d(2, 0)),
-                                    new Pose2d(4, 0, Rotation2d.fromDegrees(0)),
-                                trajectoryConfig);
-                                /*new Pose2d(8, 6.72, new Rotation2d(0)),
-                                List.of(
-                                  new Translation2d(4.478, 6.993),
-                                    new Translation2d(5.004, 5.340)
-                                    
-                                   ),
-                                    new Pose2d(5.004, 5.340, Rotation2d.fromDegrees(100.008)),
-                                trajectoryConfig);*/
-
-                // 3. Define PID controllers for tracking trajectory
-                PIDController xController = new PIDController(AutoConstants.kPXController, 0, 0);
-                PIDController yController = new PIDController(AutoConstants.kPYController, 0, 0);
-                ProfiledPIDController thetaController = new ProfiledPIDController(
-                                AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
-                thetaController.enableContinuousInput(-Math.PI, Math.PI);
-
-                // 4. Construct command to follow trajectory
-                SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
-                                trajectory,
-                                swerveSubsystem::getPose,
-                                DriveConstants.kDriveKinematics,
-                                xController,
-                                yController,
-                                thetaController,
-                                swerveSubsystem::setModuleStates,
-                                swerveSubsystem);
-
-                // 5. Add some init and wrap-up, and return everything
-                return new SequentialCommandGroup(
-                                new InstantCommand(() -> swerveSubsystem.resetpose(trajectory.getInitialPose())),
-                                swerveControllerCommand,
-                                new InstantCommand(() -> swerveSubsystem.stopModules()));
-        }
+          public Command getAutonomousCommand() {
+        // This method loads the auto when it is called, however, it is recommended
+       // to first load your paths/autos when code starts, then return the
+       // pre-loaded auto/path
+       return autoChooser.getSelected();
+       }
         public static UsbCamera usbCamera1 = null;
 
         // public static UsbCamera usbCamera2 = null;
