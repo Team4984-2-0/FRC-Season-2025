@@ -79,8 +79,8 @@ public class SwerveSubsystem extends SubsystemBase {
     private SwerveModulePosition[] WheelPositions = {frontleftpos,frontrightpos,backLeftpos,backRightpos};
     
     
-    double xLocationStartFeet = 2;   //down field long 
-    double yLocationStartFeet = 7;  // side to side 
+    double xLocationStartFeet = 10.338;   //down field long 
+    double yLocationStartFeet = 1.268;  // side to side 
     Rotation2d angleStartDegrees = Rotation2d.fromDegrees(0.0);
     Pose2d startingPosition = new Pose2d(xLocationStartFeet, yLocationStartFeet, angleStartDegrees);
     private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(DriveConstants.kDriveKinematics,

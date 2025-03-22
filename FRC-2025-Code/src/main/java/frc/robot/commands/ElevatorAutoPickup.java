@@ -16,14 +16,14 @@ public class ElevatorAutoPickup extends Command {
         }
         @Override
         public void execute(){
-            if (elevatorSub.get_encoder() > 24 && elevatorSub.get_encoder() < 28) {
+            if (elevatorSub.get_encoderElev() > 145 && elevatorSub.get_encoderElev() < 147) {
                 Finished = true;
             }
             else {
-                if (elevatorSub.get_encoder() >= 28){
-                    elevatorSub.Rotate(0.4);
+                if (elevatorSub.get_encoderElev() >= 147){
+                    elevatorSub.Rotate(0.7);
                 }
-                if (elevatorSub.get_encoder() < 24){
+                if (elevatorSub.get_encoderElev() < 145){
                     elevatorSub.Rotate(-0.4);
                 }
             }

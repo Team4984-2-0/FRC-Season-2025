@@ -11,20 +11,21 @@ public class ElevatorAutoL2 extends Command {
        
       public ElevatorAutoL2(Elevator elevatorSub){
             this.elevatorSub = elevatorSub;
+                
             addRequirements(elevatorSub);
             Finished = false;
         }
         @Override
         public void execute(){
-            if (elevatorSub.get_encoder() > 0 && elevatorSub.get_encoder() < 3) {
+            if (elevatorSub.get_encoderElev() > 22 && elevatorSub.get_encoderElev() < 25) {
                 Finished = true;
             }
             else {
-                if (elevatorSub.get_encoder() >= 3){
-                    elevatorSub.Rotate(0.3);
+                if (elevatorSub.get_encoderElev() >= 25){
+                    elevatorSub.Rotate(0.7);
                 }
-                if (elevatorSub.get_encoder() < 0){
-                    elevatorSub.Rotate(-0.3);
+                if (elevatorSub.get_encoderElev() < 22){
+                    elevatorSub.Rotate(-0.7);
                 }
             }
             

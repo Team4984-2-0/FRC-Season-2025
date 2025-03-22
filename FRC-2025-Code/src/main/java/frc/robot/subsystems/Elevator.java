@@ -51,7 +51,7 @@ private final RelativeEncoder motor1Encoder;
     // Commenting out this for now, working on elevator auto move up / down. (2/12/25)
 
 public void Rotate(double value) {
-    SmartDashboard.putNumber("encoder elevator", get_encoder());
+    SmartDashboard.putNumber("encoder elevator", get_encoderElev());
     motor1.set(value);
     motor2.set(-value);
 }
@@ -60,7 +60,7 @@ public void RotateStop() {
     motor1.set(0);
     motor2.set(0);
 }
-public double get_encoder(){
+public double get_encoderElev(){
     return motor2Encoder.getPosition();
 }
 

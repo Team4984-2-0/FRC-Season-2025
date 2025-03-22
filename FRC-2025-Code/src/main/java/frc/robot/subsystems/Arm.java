@@ -13,40 +13,37 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
-public class Launcher extends SubsystemBase {
+public class Arm extends SubsystemBase {
 
-    private SparkMax motor4;
-      private final PIDController elevatorPidController;
-        private final RelativeEncoder motor1Encoder;
+    private SparkMax motor3;     
+    private final PIDController elevatorPidController;
+    private final RelativeEncoder motor1Encoder;
 
+       
 
-
-
-    public Launcher() {
-        motor4 = new SparkMax(12, MotorType.kBrushless);
-
-        motor1Encoder = motor4.getEncoder();
+    public Arm() {
+        motor3 = new SparkMax(11, MotorType.kBrushless);       
+        motor1Encoder = motor3.getEncoder();
 
 
         elevatorPidController = new PIDController(0.4, 0, 0);
+        
         SparkMaxConfig elevatorConfig = new SparkMaxConfig();
         elevatorConfig.idleMode(SparkBaseConfig.IdleMode.kBrake);
-       
     }
 
 public void Spin(double value) {
-         SmartDashboard.putNumber("encoder arm", get_encoder());
+    SmartDashboard.putNumber("encoder arm", get_encoder());
 
-    motor4.set(-value);
+    motor3.set(value);
 }
 
 public void Spin() {
-    motor4.set(0);
+    motor3.set(0);
    
 }
 
 public double get_encoder(){
     return motor1Encoder.getPosition();
 }
-
 }

@@ -3,6 +3,7 @@ package frc.robot;
 import java.util.List;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -20,6 +21,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
@@ -44,10 +46,20 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorAutoPickup;
 import frc.robot.commands.ElevatorAutoL2;
 import frc.robot.commands.ElevatorAutoL3;
+import frc.robot.commands.ElevatorAutoL4;
 import frc.robot.commands.Climbbutback;
+import frc.robot.commands.ArmDown;
+import frc.robot.commands.ArmUP;
+import frc.robot.commands.ArmAuto1;
+
+import frc.robot.subsystems.Arm;
+
+
 
 
 import frc.robot.commands.Launch;
+import frc.robot.commands.Launchfast;
+
 import frc.robot.commands.Intake;
 import frc.robot.commands.ChangeSpeedHalf;
 import frc.robot.commands.ChangeSpeedMax;
@@ -58,8 +70,11 @@ public class RobotContainer {
       
         private final Climber climber = new Climber();
   
+
+        private final Arm arm = new Arm();
+
         private final Elevator elevator = new Elevator();
-       
+
         private final Launcher launcher = new Launcher();
         
         private final SendableChooser<Command> autoChooser;
@@ -70,6 +85,9 @@ public class RobotContainer {
         SendableChooser<Command> m_Chooser = new SendableChooser<>();
 
         public RobotContainer() {
+
+                NamedCommands.registerCommand("L4", (new ElevatorAutoL4(elevator)));
+                NamedCommands.registerCommand("Shoot", (new Launch(launcher)));
 
                 autoChooser = AutoBuilder.buildAutoChooser();
 
@@ -109,19 +127,45 @@ public class RobotContainer {
         }
 
         private void configureButtonBindings () {
-               /*8  new JoystickButton(driverJoytick, 2).whileTrue(new resetheading(swerveSubsystem));
+                new JoystickButton(driverJoytick, 2).whileTrue(new resetheading(swerveSubsystem));
                 new JoystickButton(driverJoytick, 1).whileTrue(new ChangeSpeedHalf(swerveSubsystem));
                 new JoystickButton(driverJoytick, 3).whileTrue(new ChangeSpeedMax(swerveSubsystem));
                 new JoystickButton(driverJoytick, 4).whileTrue(new ChangeSpeedDanger(swerveSubsystem));
+            
+                // Elevator & Arm for L4
+                new JoystickButton(operatorJoytick,1).whileTrue(new ArmAuto1(launcher));
+                new JoystickButton(operatorJoytick, 1).whileTrue(new ElevatorAutoL4(elevator));
+                
+                 // Elevator & Arm for Source
+                new JoystickButton(operatorJoytick, 11).whileTrue(new ElevatorAutoPickup(elevator));
 
-                new JoystickButton(operatorJoytick, 5).whileTrue(new Intake(launcher));
+                 // Elevator & Arm for L3
+                new JoystickButton(operatorJoytick, 2).whileTrue(new ElevatorAutoL3(elevator));
+
+                 // Elevator & Arm for L2
+                new JoystickButton(operatorJoytick, 3).whileTrue(new ElevatorAutoL2(elevator));
+
+                // Intake & Outake
+                new JoystickButton(operatorJoytick, 10).whileTrue(new ArmDown(arm));
+                new JoystickButton(operatorJoytick,9).whileTrue(new ArmUP(arm));
+                new JoystickButton(operatorJoytick, 6).whileTrue(new Launchfast(arm));
+
+
+                // Elevator
+                new JoystickButton(operatorJoytick, 5).whileTrue(new ElevatorGoUp(elevator));
+                new JoystickButton(operatorJoytick,4).whileTrue(new ElevatorGodown(elevator));
+
+                // Arm
+                new JoystickButton(operatorJoytick, 8).whileTrue(new Launch(launcher));
+                new JoystickButton(operatorJoytick, 7).whileTrue(new Intake(launcher));
+
+
+/*8 
                 new JoystickButton(operatorJoytick, 8).whileTrue(new Climb(climber));
                 new JoystickButton(operatorJoytick, 7).whileTrue(new Climbbutback(climber));
 
-                new JoystickButton(operatorJoytick, 6).whileTrue(new Launch(launcher));
                 new JoystickButton(operatorJoytick, 1).whileTrue(new ElevatorAutoL2(elevator));
-                new JoystickButton(operatorJoytick, 3).whileTrue(new ElevatorAutoPickup(elevator));
-                new JoystickButton(operatorJoytick,2).whileTrue(new ElevatorAutoL3(elevator));
+               
               // XboxController.Button.
                // new JoystickButton(operatorJoytick, 7).whileTrue(new Launch(launcher)); */
                

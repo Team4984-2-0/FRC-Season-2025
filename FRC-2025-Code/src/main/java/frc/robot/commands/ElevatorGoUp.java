@@ -11,7 +11,7 @@ public class ElevatorGoUp extends Command {
         }
         @Override
         public void execute(){
-              elevatorSub.Rotate(0.4);
+              elevatorSub.Rotate(0.6);
         }
         @Override
         public void end(boolean interrupted){
