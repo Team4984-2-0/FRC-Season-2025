@@ -21,11 +21,11 @@ public class ElevatorAutoL4 extends Command {
             }
             else {
                 if (elevatorSub.get_encoderElev() < 273){
-                    if (elevatorSub.get_encoderElev() < 200){
-                        elevatorSub.Rotate(-0.7);
+                    if (elevatorSub.get_encoderElev() < 230){
+                        elevatorSub.Rotate(-1);
                     }
-                    if (elevatorSub.get_encoderElev() > 200){
-                        elevatorSub.Rotate(-0.3);
+                    if (elevatorSub.get_encoderElev() > 230){
+                        elevatorSub.Rotate(-0.6);
                     }
                 }
                 if (elevatorSub.get_encoderElev() > 275){

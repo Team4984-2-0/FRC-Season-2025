@@ -11,7 +11,7 @@ public class ArmUP extends Command {
         }
         @Override
         public void execute(){
-            intakesub.Spin(0.20);
+            intakesub.Spin(0.10);
         }
         @Override
         public void end(boolean interrupted){

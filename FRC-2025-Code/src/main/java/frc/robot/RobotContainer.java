@@ -51,6 +51,9 @@ import frc.robot.commands.Climbbutback;
 import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUP;
 import frc.robot.commands.ArmAuto1;
+import frc.robot.commands.ArmAuto2;
+import frc.robot.commands.ShootAuto;
+import frc.robot.commands.ArmAutoS;
 
 import frc.robot.subsystems.Arm;
 
@@ -85,9 +88,11 @@ public class RobotContainer {
         SendableChooser<Command> m_Chooser = new SendableChooser<>();
 
         public RobotContainer() {
+          
+                NamedCommands.registerCommand("ElevatorAutoL4", (new ElevatorAutoL4(elevator)));
+                NamedCommands.registerCommand("ArmAuto1", (new ArmAuto1(launcher)));
 
-                NamedCommands.registerCommand("L4", (new ElevatorAutoL4(elevator)));
-                NamedCommands.registerCommand("Shoot", (new Launch(launcher)));
+                NamedCommands.registerCommand("ArmUP", (new ArmUP(arm)));
 
                 autoChooser = AutoBuilder.buildAutoChooser();
 
@@ -138,12 +143,16 @@ public class RobotContainer {
                 
                  // Elevator & Arm for Source
                 new JoystickButton(operatorJoytick, 11).whileTrue(new ElevatorAutoPickup(elevator));
+                new JoystickButton(operatorJoytick,11).whileTrue(new ArmAutoS(launcher));
 
                  // Elevator & Arm for L3
                 new JoystickButton(operatorJoytick, 2).whileTrue(new ElevatorAutoL3(elevator));
+                new JoystickButton(operatorJoytick,2).whileTrue(new ArmAuto2(launcher));
 
                  // Elevator & Arm for L2
                 new JoystickButton(operatorJoytick, 3).whileTrue(new ElevatorAutoL2(elevator));
+                new JoystickButton(operatorJoytick,3).whileTrue(new ArmAuto2(launcher));
+
 
                 // Intake & Outake
                 new JoystickButton(operatorJoytick, 10).whileTrue(new ArmDown(arm));
